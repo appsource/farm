@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FarmFactory — Static Demo</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- FarmFactory widget styles -->
+  <link rel="stylesheet" href="../wordpress/assets/css/farmfactory.css">
+  <!-- AppKit / WalletConnect styles -->
+  <link rel="stylesheet" href="../reactwidget/rainbow.css">
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      background: #f5f7fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .wallet-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .wallet-header-logo {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #111827;
+      letter-spacing: -0.01em;
+    }
+    .page-content {
+      padding: 40px 20px;
+    }
+    h1 {
+      color: #111827;
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    p.subtitle {
+      color: #6b7280;
+      text-align: center;
+      font-size: 0.9rem;
+      margin: 0 0 16px;
+    }
+    .metamask-note {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .metamask-note span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      color: #9a3412;
+    }
+    .metamask-note a {
+      color: #ea580c;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .metamask-note a:hover { text-decoration: underline; }
+    .ff-farmfactory-widget {
+      display: block;
+      max-width: 480px;
+      margin: 0 auto 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Wallet header — appkit-button is registered by main.js (Reown AppKit) -->
+  <header class="wallet-header">
+    <span class="wallet-header-logo">FarmFactory</span>
+    <appkit-button></appkit-button>
+  </header>
+
+  <div class="page-content">
+
+  <h1>FarmFactory</h1>
+  <p class="subtitle">Widget without WordPress. Connect wallet to interact.</p>
+
+  <div class="metamask-note">
+    <span>
+      🦊 Need a wallet?
+      <a href="https://metamask.io/download/" target="_blank" rel="noopener">Install MetaMask</a>
+      &nbsp;|&nbsp; Switch to BSC Testnet (Chain 97)
+    </span>
+  </div>
+
+  <!--
+    SO_FARM_FACTORY_ROOT — base URL for loading JS chunks.
+    Auto-detected from current page URL (one level up from /demo/).
+    Override only if chunks are hosted on a different domain.
+  -->
+  <script>
+    window.SO_FARM_FACTORY_ROOT = new URL('..', window.location.href).href.replace(/\/$/, '');
+  </script>
+
+  <!--
+    Widget div attributes:
+      data-network-name     — network key from chains.ts: "bsc" | "bsc_test" | "mainnet" | "matic" | ...
+      data-farm-address     — deployed StakingRewards contract address
+      data-rewards-address  — ERC20 token users EARN
+      data-staking-address  — ERC20 token users DEPOSIT
+      data-rewards-token-icon — URL to rewards token image (optional)
+      data-staking-token-icon — URL to staking token image (optional)
+
+    BNB Testnet (chain 97) — funded farm:
+      Farm:    0xd8B2EbFD5fe6d392cCd79711Ef66Bb181aE3d278 (1M FFT over 30 days)
+      Rewards: FFT (FarmFactory Token) 0xda9A5915b85028c2c0882b44dEd38A396dfEB55a
+      Staking: WEENUS 0xB9757f522B1D3B0705d3ffcaf332c2645bEDB04f
+      RPC:     https://bsc-testnet-rpc.publicnode.com
+      Explorer: https://testnet.bscscan.com
+  -->
+  <div class="ff-farmfactory-widget"
+    data-network-name="bsc_test"
+    data-farm-address="0xd8B2EbFD5fe6d392cCd79711Ef66Bb181aE3d278"
+    data-rewards-address="0xda9A5915b85028c2c0882b44dEd38A396dfEB55a"
+    data-staking-address="0xB9757f522B1D3B0705d3ffcaf332c2645bEDB04f"
+  ></div>
+
+  <!-- React widget bundle -->
+  <script defer src="../reactwidget/static/js/main.js"></script>
+
+  </div><!-- .page-content -->
+</body>
+</html>
